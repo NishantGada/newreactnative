@@ -1,61 +1,105 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Alert, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 
 export default function ListItem({ item, removeListItem }) {
     if (item.color == 'red') {
         return (
-            <TouchableOpacity key={item.id} onPress={() => removeListItem(item.key)}>
+            <TouchableWithoutFeedback key={item.id}
+                onLongPress={() => {
+                    Alert.alert(
+                        "Delete",
+                        "Are you sure?",
+                        [
+                            {
+                                text: "Cancel",
+                                onPress: () => console.log("Cancel Pressed"),
+                                style: "cancel"
+                            },
+                            { text: "Delete", onPress: () => removeListItem(item.key) }
+                        ]
+                    )
+                }}
+            >
                 <Text style={[styles.listItemStyle, styles.listItemStyleRed]}>
                     {item.text}
                 </Text>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
         )
     }
     else if (item.color == 'yellow') {
         return (
-            <TouchableOpacity key={item.id} onPress={() => removeListItem(item.key)}>
+            <TouchableWithoutFeedback key={item.id} onLongPress={() => {
+                Alert.alert(
+                    "Delete",
+                    "Are you sure?",
+                    [
+                        {
+                            text: "Cancel",
+                            onPress: () => console.log("Cancel Pressed"),
+                            style: "cancel"
+                        },
+                        { text: "Delete", onPress: () => removeListItem(item.key) }
+                    ]
+                )
+            }
+            }>
                 <Text style={[styles.listItemStyle, styles.listItemStyleYellow]}>
                     {item.text}
                 </Text>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
         )
     }
     else if (item.color == 'green') {
         return (
-            <TouchableOpacity key={item.id} onPress={() => removeListItem(item.key)}>
+            <TouchableWithoutFeedback key={item.id} onLongPress={() => {
+                Alert.alert(
+                    "Delete",
+                    "Are you sure?",
+                    [
+                        {
+                            text: "Cancel",
+                            onPress: () => console.log("Cancel Pressed"),
+                            style: "cancel"
+                        },
+                        { text: "Delete", onPress: () => removeListItem(item.key) }
+                    ]
+                )
+            }
+            }>
                 <Text style={[styles.listItemStyle, styles.listItemStyleGreen]}>
                     {item.text}
                 </Text>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
         )
     }
 }
 
 const styles = StyleSheet.create({
     listItemStyle: {
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: 'bold',
         padding: 14,
         marginBottom: 25,
         color: 'black',
+        borderRadius: 4,
         // borderWidth: 1.5,
         // borderStyle: 'dashed',
         // borderColor: 'purple',
         // borderRadius: 1,
     },
-    
+
     listItemStyleRed: {
-        backgroundColor: '#c0392b',
-        color: 'white',
+        backgroundColor: '#ff7675',
+        // backgroundColor: '#c0392b',
     },
-    
+
     listItemStyleYellow: {
-        backgroundColor: '#f39c12',
-        color: 'black',
+        backgroundColor: '#ffeaa7',
+        // backgroundColor: '#f39c12',
     },
-    
+
     listItemStyleGreen: {
-        backgroundColor: '#27ae60',
-        color: 'white',
+        backgroundColor: '#55efc4',
+        // backgroundColor: '#27ae60',
     },
 })

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import ListItem from './ListItem';
 
 export default function List({ list, removeListItem }) {
@@ -16,6 +16,7 @@ export default function List({ list, removeListItem }) {
             <View style={styles.list}>
                 <FlatList 
                     data={list}
+                    showsVerticalScrollIndicator={false}
                     renderItem = {({ item }) => (                        
                         <ListItem item={item} removeListItem={removeListItem} />
                     )}
@@ -43,16 +44,5 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         // borderWidth: 1,
         // borderColor: 'black',
-
     },
-    
-    red: {
-        fontSize: 16,
-        padding: 14,
-        marginBottom: 10,
-        // borderWidth: 1,
-        borderColor: 'black',
-        backgroundColor: '#ff7675',
-        color: 'white',
-    }
 })

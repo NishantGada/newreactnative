@@ -1,10 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
+import ExpoStatusBar from 'expo-status-bar/build/ExpoStatusBar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Modal, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import {
+    Image,
+    StyleSheet,
+    Text,
+    View,
+    Modal,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+    Keyboard,
+    SafeAreaView,
+    Dimensions
+} from 'react-native';
 
 import AddItem from './AddItem'
+import CompletelyLogo from '../assets/CompletelyLogo.png'
 
 const fiftyPercent = '20%';
+const { width, height } = Dimensions.get('window');
 
 export default function Header({ addListItem }) {
 
@@ -22,13 +36,14 @@ export default function Header({ addListItem }) {
                 </View>
             </Modal>
 
-            <Text style={styles.headerTxt}>Completely</Text>
+            {/* <Text style={styles.headerTxt}>Completely</Text> */}
+            <Image source={CompletelyLogo} style={{ width: 180, height: 60 }} />
 
             <TouchableOpacity onPress={() => setModal(true)}>
                 <Text style={styles.addButtonTxt}>+</Text>
             </TouchableOpacity>
 
-            {/* <StatusBar style="auto" /> */}
+            {/* <StatusBar style="dark"/> */}
         </View>
     )
 }
@@ -36,24 +51,32 @@ export default function Header({ addListItem }) {
 const styles = StyleSheet.create({
     header: {
         // flex: 1,
-        backgroundColor: 'lightpink',
+        backgroundColor: 'black',
+        // backgroundColor: 'lightpink',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: 18,
+        paddingHorizontal: 18,
+        // paddingTop: 2,
+        paddingBottom: 5,
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        elevation: 5,
+        borderTopColor: 'white',
+        // marginTop: 16,
     },
 
     headerTxt: {
         fontSize: 28,
         fontWeight: 'bold',
         fontStyle: 'italic',
+        color: '#f5f6fa',
         // borderWidth: 1,
         // borderColor: 'black',
     },
 
     addButtonTxt: {
         fontSize: 34,
+        color: '#f5f6fa'
     },
 
     modalView: {

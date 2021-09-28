@@ -1,7 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text,TextInput, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { 
+    StyleSheet, 
+    Text,
+    TextInput, 
+    View, 
+    TouchableOpacity, 
+    TouchableWithoutFeedback, 
+    Keyboard, 
+    Alert,
+    Dimensions 
+} from 'react-native';
 import { RadioButton } from 'react-native-paper';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const {width, height} = Dimensions.get('window');
 
 export default function AddItem({ addListItem, closeModal }) {
 
@@ -48,21 +60,27 @@ export default function AddItem({ addListItem, closeModal }) {
                     <Text>Neither Important nor Urgent</Text>
                 </View>
 
-                <TouchableOpacity onPress={() => {
-                    addListItem(text, checked)
-                    closeModal()
-                    Alert.alert('Success', 'Successfully added!')
-                }}>
-                    <View style={styles.submitBtn}>
-                        <Text style={styles.submitBtnTxt}>Add</Text>
-                    </View>
+                <View style={styles.submitView}>
+                    <TouchableOpacity onPress={() => {
+                        if (text.length > 0) {
+                            addListItem(text, checked)
+                            closeModal()
+                            Alert.alert('Success', 'Successfully added!')
+                        } else {
+                            alert("Task cannot be empty");
+                        }
+                    }}>
+                        <View style={styles.submitBtn}>
+                            <Text style={styles.submitBtnTxt}>Add</Text>
+                        </View>
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity onPress={() => closeModal()}>
+                        <View style={styles.submitBtn}>
+                            <Text style={styles.submitBtnTxt}>Close</Text>
+                        </View>
                 </TouchableOpacity>
-                
-                <TouchableOpacity onPress={() => closeModal()}>
-                    <View style={styles.submitBtn}>
-                        <Text style={styles.submitBtnTxt}>Close</Text>
-                    </View>
-                </TouchableOpacity>
+                </View>
             </View>
         </TouchableWithoutFeedback>
     )
@@ -70,26 +88,36 @@ export default function AddItem({ addListItem, closeModal }) {
 
 const styles = StyleSheet.create({
     input: {
-        borderWidth: 1,
-        borderColor: 'black',
+        // borderWidth: 1,
+        // borderColor: 'black',
+        backgroundColor: '#f1f2f6',
         padding: 10,
         marginBottom: 20,
     },
 
+    submitView: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+
     submitBtn: {
-        height: 50,
-        // borderWidth: 1,
-        // borderColor: 'black',
-        backgroundColor: 'coral',
+        // height: 50,
+        padding: 10,
+        backgroundColor: '#f1f2f6',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: 20,
+        width: width*0.4,
     },
 
     submitBtnTxt: {
-        fontSize: 18,
-        color: 'white'
+        fontSize: 16,
+        color: 'black',
+        fontWeight: 'bold',
+        // color: 'white'
     },
 
     radioView: {
